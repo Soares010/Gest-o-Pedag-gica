@@ -1,0 +1,19 @@
+{
+  "name": "mariosoares/sistemagestaopedagogica",
+  "autoload": {
+    "psr-4": {
+      "App\\": "app/",
+      "Models\\": "models/",
+      "Controllers\\": "controllers/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Mário Fernando Gomes Neto",
+      "email": "mariosoares20012005@gmail.com"
+    }
+  ],
+  "require": {
+    "bramus/router": "^1.6"
+  }
+}
