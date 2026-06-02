@@ -11,7 +11,7 @@ import "../assets/styles/Sidebar.css";
 export const Sidebar = () => {
   const [openMenus, setOpenMenus] = useState({
     infoGerais: false,
-    usuarios: true,
+    usuarios: false,
     financas: false,
   });
 
