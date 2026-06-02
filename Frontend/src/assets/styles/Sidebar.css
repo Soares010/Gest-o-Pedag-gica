@@ -1,0 +1,111 @@
+.sidebar {
+	width: var(--sidebar-width);
+	height: 100vh;
+	background: white;
+	border-right: 1px solid var(--border);
+	position: fixed;
+	left: 0;
+	top: 0;
+	padding: 24px 0;
+	overflow-y: auto;
+}
+
+.sidebar-header {
+	display: flex;
+	align-items: center;
+	padding: 0 24px 32px;
+	gap: 12px;
+	font-weight: 700;
+	color: var(--primary);
+}
+
+.logo-box {
+	background: var(--primary);
+	color: white;
+	width: 35px;
+	height: 35px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 8px;
+}
+
+.nav-section-title {
+	display: block;
+	padding: 16px 24px 8px;
+	font-size: 11px;
+	font-weight: 700;
+	color: var(--text-muted);
+	letter-spacing: 0.05em;
+}
+
+.nav-link {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 12px 24px;
+	font-size: 14px;
+	color: var(--text-muted);
+	cursor: pointer;
+	transition: 0.2s;
+}
+
+
+.nav-link.active {
+	background: #f5f3ff;
+	color: var(--primary);
+	border-right: 3px solid var(--primary);
+}
+
+/* Agrupador do ícone e do texto interno */
+.nav-link-text {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+}
+
+/* Animação de rotação para a seta (Chevron) */
+.chevron-icon {
+	transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-group.open .chevron-icon {
+	transform: rotate(180deg);
+}
+
+/* Wrapper que controla o efeito de deslize (Accordion slide) */
+.sub-menu-wrapper {
+	display: grid;
+	grid-template-rows: 0fr;
+	transition: grid-template-rows 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-group.open .sub-menu-wrapper {
+	grid-template-rows: 1fr;
+}
+
+/* Sub-menu interno */
+.sub-menu {
+	overflow: hidden;
+	padding-left: 54px;
+}
+
+.sub-link {
+	padding: 8px 0;
+	font-size: 13px;
+	color: var(--text-muted);
+	cursor: pointer;
+	display: block;
+}
+
+.sub-link.active {
+	color: var(--primary);
+	font-weight: 600;
+}
+
+/* Responsividade */
+@media (max-width: 1024px) {
+	.sidebar {
+		display: none;
+	}
+}
