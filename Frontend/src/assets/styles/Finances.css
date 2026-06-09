@@ -1,0 +1,594 @@
+/* Variáveis baseadas em padrões clean (Linear/Stripe) */
+:root {
+	--finance-bg: #F8FAFC;
+	--finance-surface: #FFFFFF;
+	--finance-border: #E2E8F0;
+
+	--text-primary: #0F172A;
+	--text-secondary: #64748B;
+
+	--color-primary: #8B5CF6;
+	/* Roxo da marca ON-SCHOOL */
+	--color-primary-hover: #7C3AED;
+
+	--color-success: #10B981;
+	--color-success-bg: #D1FAE5;
+	--color-danger: #EF4444;
+	--color-danger-bg: #FEE2E2;
+	--color-warning: #F59E0B;
+	--color-warning-bg: #FEF3C7;
+}
+
+.finance-layout {
+	padding: 2.5rem;
+	background-color: var(--finance-bg);
+	min-height: 100vh;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+	color: var(--text-primary);
+}
+
+/* =========================================
+   Cabeçalho e Controles
+   ========================================= */
+.finance-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-end;
+	margin-bottom: 2.5rem;
+	flex-wrap: wrap;
+	gap: 1.5rem;
+}
+
+.finance-header__title {
+	font-size: 1.875rem;
+	font-weight: 700;
+	letter-spacing: -0.025em;
+	margin: 0 0 0.5rem 0;
+}
+
+.finance-header__subtitle {
+	color: var(--text-secondary);
+	font-size: 0.9375rem;
+	margin: 0;
+}
+
+.finance-header__actions {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+}
+
+.finance-controls {
+	display: flex;
+	background: var(--finance-surface);
+	border: 1px solid var(--finance-border);
+	border-radius: 8px;
+	padding: 0.25rem;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.finance-controls__select {
+	border: none;
+	background: transparent;
+	padding: 0.5rem 1rem;
+	font-size: 0.875rem;
+	color: var(--text-primary);
+	font-weight: 500;
+	cursor: pointer;
+	outline: none;
+}
+
+/* =========================================
+   Grid de KPIs Financeiros
+   ========================================= */
+.finance-kpi-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+	gap: 1.5rem;
+	margin-bottom: 2.5rem;
+}
+
+.finance-card {
+	background: rgba(255, 255, 255, 0.8);
+	backdrop-filter: blur(12px);
+	-webkit-backdrop-filter: blur(12px);
+	border: 1px solid rgba(255, 255, 255, 0.5);
+	border-radius: 16px;
+	padding: 1.5rem;
+	box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.025);
+	transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.finance-card:hover {
+	transform: translateY(-3px);
+	box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
+}
+
+.finance-card__header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 1rem;
+}
+
+.finance-card__label {
+	font-size: 0.875rem;
+	font-weight: 600;
+	color: var(--text-secondary);
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+}
+
+.finance-card__value {
+	font-size: 2rem;
+	font-weight: 700;
+	letter-spacing: -0.025em;
+	margin: 0 0 0.5rem 0;
+	color: var(--text-primary);
+}
+
+.finance-card__comparison {
+	font-size: 0.8125rem;
+	font-weight: 500;
+	margin: 0;
+}
+
+.finance-card__comparison.positive {
+	color: var(--color-success);
+}
+
+.finance-card__comparison.negative {
+	color: var(--color-danger);
+}
+
+.finance-card__comparison.neutral {
+	color: var(--text-secondary);
+}
+
+/* =========================================
+   Layout de Conteúdo (Transações e Resumo)
+   ========================================= */
+.finance-content-grid {
+	display: grid;
+	grid-template-columns: 2fr 1fr;
+	gap: 1.5rem;
+}
+
+@media (max-width: 1024px) {
+	.finance-content-grid {
+		grid-template-columns: 1fr;
+	}
+}
+
+.finance-panel {
+	background: var(--finance-surface);
+	border: 1px solid var(--finance-border);
+	border-radius: 16px;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+	overflow: hidden;
+}
+
+.finance-panel__header {
+	padding: 1.5rem;
+	border-bottom: 1px solid var(--finance-border);
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.finance-panel__title {
+	font-size: 1.125rem;
+	font-weight: 600;
+	margin: 0;
+}
+
+/* =========================================
+   Tabela de Transações
+   ========================================= */
+.finance-table-wrapper {
+	overflow-x: auto;
+}
+
+.finance-table {
+	width: 100%;
+	border-collapse: collapse;
+	text-align: left;
+}
+
+.finance-table th {
+	background: #F9FAFB;
+	padding: 1rem 1.5rem;
+	font-size: 0.75rem;
+	font-weight: 600;
+	color: var(--text-secondary);
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+	border-bottom: 1px solid var(--finance-border);
+}
+
+.finance-table td {
+	padding: 1rem 1.5rem;
+	font-size: 0.875rem;
+	border-bottom: 1px solid var(--finance-border);
+	vertical-align: middle;
+}
+
+.finance-table tbody tr:last-child td {
+	border-bottom: none;
+}
+
+.finance-table tbody tr:hover {
+	background: #F8FAFC;
+}
+
+.finance-table__date {
+	color: var(--text-secondary);
+	white-space: nowrap;
+}
+
+.finance-table__desc {
+	font-weight: 500;
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+}
+
+.transaction-dot {
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	flex-shrink: 0;
+}
+
+.transaction-dot--receita {
+	background-color: var(--color-success);
+}
+
+.transaction-dot--despesa {
+	background-color: var(--color-danger);
+}
+
+.finance-table__amount {
+	font-weight: 600;
+	font-variant-numeric: tabular-nums;
+	white-space: nowrap;
+}
+
+/* =========================================
+   Estrutura de Custos (Barras de Progresso)
+   ========================================= */
+.cost-breakdown {
+	padding: 1.5rem;
+	display: flex;
+	flex-direction: column;
+	gap: 1.25rem;
+}
+
+.cost-item__info {
+	display: flex;
+	justify-content: space-between;
+	font-size: 0.875rem;
+	margin-bottom: 0.5rem;
+	color: var(--text-secondary);
+}
+
+.progress-bar {
+	height: 6px;
+	background-color: var(--finance-border);
+	border-radius: 999px;
+	overflow: hidden;
+}
+
+.progress-bar__fill {
+	height: 100%;
+	border-radius: 999px;
+	transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* =========================================
+   Caixa de Ação Rápida
+   ========================================= */
+.quick-action-box {
+	margin: 0 1.5rem 1.5rem;
+	padding: 1.25rem;
+	background: rgba(139, 92, 246, 0.05);
+	border: 1px dashed var(--color-primary);
+	border-radius: 12px;
+	text-align: center;
+}
+
+.quick-action-box h4 {
+	color: var(--color-primary);
+	margin: 0 0 0.5rem 0;
+	font-size: 1rem;
+}
+
+.quick-action-box p {
+	color: var(--text-secondary);
+	font-size: 0.875rem;
+	margin: 0 0 1rem 0;
+}
+
+/* =========================================
+   Botões e Tags
+   ========================================= */
+.btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5rem;
+	padding: 0.625rem 1.25rem;
+	font-size: 0.875rem;
+	font-weight: 600;
+	border-radius: 8px;
+	cursor: pointer;
+	transition: all 0.2s ease;
+	border: none;
+}
+
+.btn--primary {
+	background: var(--color-primary);
+	color: white;
+	box-shadow: 0 4px 6px -1px rgba(139, 92, 246, 0.3);
+}
+
+.btn--primary:hover {
+	background: var(--color-primary-hover);
+	transform: translateY(-1px);
+}
+
+.btn--secondary {
+	background: var(--finance-surface);
+	color: var(--text-primary);
+	border: 1px solid var(--finance-border);
+}
+
+.btn--secondary:hover {
+	background: #F1F5F9;
+}
+
+.btn--outline {
+	background: transparent;
+	color: var(--text-secondary);
+}
+
+.btn--outline:hover {
+	color: var(--text-primary);
+}
+
+.btn--text {
+	background: transparent;
+	color: var(--color-primary);
+	padding: 0;
+}
+
+.btn--text:hover {
+	color: var(--color-primary-hover);
+	text-decoration: underline;
+}
+
+.w-100 {
+	width: 100%;
+}
+
+.status-tag {
+	display: inline-flex;
+	padding: 0.25rem 0.625rem;
+	border-radius: 999px;
+	font-size: 0.75rem;
+	font-weight: 600;
+}
+
+.status-tag--concluido {
+	background: var(--color-success-bg);
+	color: #065F46;
+}
+
+.status-tag--pendente {
+	background: var(--color-warning-bg);
+	color: #92400E;
+}
+
+/* Utilitários de Texto */
+.text-green {
+	color: var(--color-success);
+}
+
+.text-red {
+	color: var(--color-danger);
+}
+
+.text-purple {
+	color: var(--color-primary);
+}
+
+.text-orange {
+	color: var(--color-warning);
+}
+
+.font-medium {
+	font-weight: 500;
+	color: var(--text-primary);
+}
+
+/* =========================================
+   MODAL OVERLAY & CONTAINER (Stripe / Linear style)
+   ========================================= */
+.finance-modal-backdrop {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background-color: rgba(15, 23, 42, 0.35);
+	/* Escurecimento suave */
+	backdrop-filter: blur(8px);
+	/* Blur dinâmico */
+	-webkit-backdrop-filter: blur(8px);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 9999;
+	animation: modalFadeIn 0.2s ease-out;
+}
+
+.finance-modal {
+	background: var(--finance-surface);
+	border: 1px solid var(--finance-border);
+	border-radius: 16px;
+	width: 100%;
+	max-width: 460px;
+	box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 10px 10px -5px rgba(0, 0, 0, 0.03);
+	animation: modalScaleUp 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+	overflow: hidden;
+}
+
+.finance-modal__header {
+	padding: 1.25rem 1.5rem;
+	border-bottom: 1px solid var(--finance-border);
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.finance-modal__title {
+	font-size: 1.125rem;
+	font-weight: 600;
+	margin: 0;
+	color: var(--text-primary);
+}
+
+.finance-modal__close-btn {
+	background: transparent;
+	border: none;
+	color: var(--text-secondary);
+	cursor: pointer;
+	padding: 0.25rem;
+	border-radius: 6px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: all 0.15s ease;
+}
+
+.finance-modal__close-btn:hover {
+	background-color: #F1F5F9;
+	color: var(--text-primary);
+}
+
+.finance-modal__form {
+	padding: 1.5rem;
+	display: flex;
+	flex-direction: column;
+	gap: 1.25rem;
+}
+
+/* Campos de Formulário Modernos */
+.form-group {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+
+.form-group__label {
+	font-size: 0.8125rem;
+	font-weight: 600;
+	color: var(--text-secondary);
+	letter-spacing: 0.01em;
+}
+
+.form-group__input,
+.form-group__select {
+	padding: 0.625rem 0.875rem;
+	font-size: 0.9375rem;
+	border: 1px solid var(--finance-border);
+	border-radius: 8px;
+	background-color: var(--finance-surface);
+	color: var(--text-primary);
+	outline: none;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+	transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.form-group__input:focus,
+.form-group__select:focus {
+	border-color: var(--color-primary);
+	box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.12);
+}
+
+.form-row-grid {
+	display: grid;
+	grid-template-columns: 1.2fr 1fr;
+	gap: 1rem;
+}
+
+/* SEGMENTED CONTROL (Premium Toggle Switch) */
+.segmented-control {
+	display: flex;
+	background: #F1F5F9;
+	padding: 0.25rem;
+	border-radius: 8px;
+	border: 1px solid var(--finance-border);
+}
+
+.segmented-control input[type="radio"] {
+	display: none;
+}
+
+.segmented-control__button {
+	flex: 1;
+	text-align: center;
+	padding: 0.5rem;
+	font-size: 0.875rem;
+	font-weight: 600;
+	color: var(--text-secondary);
+	border-radius: 6px;
+	cursor: pointer;
+	transition: all 0.15s ease;
+	user-select: none;
+}
+
+.segmented-control input[type="radio"]:checked+.segmented-control__button {
+	background: var(--finance-surface);
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.segmented-control input[type="radio"]:checked+.segmented-control__button--income {
+	color: var(--color-success);
+}
+
+.segmented-control input[type="radio"]:checked+.segmented-control__button--expense {
+	color: var(--color-danger);
+}
+
+.finance-modal__footer {
+	display: flex;
+	justify-content: flex-end;
+	gap: 0.75rem;
+	margin-top: 0.5rem;
+	padding-top: 1.25rem;
+	border-top: 1px solid var(--finance-border);
+}
+
+/* CHOREOGRAPHY ANIMATIONS */
+@keyframes modalFadeIn {
+	from {
+		opacity: 0;
+	}
+
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes modalScaleUp {
+	from {
+		transform: scale(0.97);
+		opacity: 0;
+	}
+
+	to {
+		transform: scale(1);
+		opacity: 1;
+	}
+}

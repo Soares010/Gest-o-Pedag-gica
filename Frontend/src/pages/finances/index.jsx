@@ -1,15 +1,16 @@
 import React, { useState } from "react";
-import "./gestao-financeira.css";
+import "../../assets/styles/Finances.css";
 
 export const Finances = () => {
   const [filtroMes, setFiltroMes] = useState("outubro");
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // Dados simulados de transações recentes (Valores em Kwanza)
-  const transacoesData = [
+  // Lista de transações com o termo correto "Propina"
+  const [transacoes, setTransacoes] = useState([
     {
       id: 1,
       data: "05 Out, 2023",
-      descricao: "Mensalidade - 10ª Classe A",
+      descricao: "Propina - 10ª Classe A",
       tipo: "receita",
       valor: 35000,
       status: "concluido",
@@ -33,7 +34,7 @@ export const Finances = () => {
     {
       id: 4,
       data: "01 Out, 2023",
-      descricao: "Mensalidade - 12ª Classe B",
+      descricao: "Propina - 12ª Classe B",
       tipo: "receita",
       valor: 42000,
       status: "concluido",
@@ -46,15 +47,66 @@ export const Finances = () => {
       valor: 150000,
       status: "concluido",
     },
-  ];
+  ]);
 
-  // Função utilitária para formatar moeda
+  // Estado do formulário adaptado para o registo de propinas e despesas
+  const [formTransacao, setFormTransacao] = useState({
+    tipo: "receita", // receita = Propina, despesa = Geral
+    aluno: "",
+    classe: "10ª Classe A",
+    mesReferencia: "Outubro",
+    descricaoDespesa: "", // Usado apenas se for despesa
+    valor: "",
+    status: "concluido",
+  });
+
   const formatarMoeda = (valor) => {
     return new Intl.NumberFormat("pt-AO", {
       style: "currency",
       currency: "AOA",
       minimumFractionDigits: 2,
     }).format(valor);
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormTransacao((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSalvarTransacao = (e) => {
+    e.preventDefault();
+    if (!formTransacao.valor) return;
+
+    // Constrói a descrição dinamicamente baseado no tipo de fluxo
+    let descricaoFinal = "";
+    if (formTransacao.tipo === "receita") {
+      descricaoFinal = `Propina (${formTransacao.mesReferencia}) - ${formTransacao.aluno} [${formTransacao.classe}]`;
+    } else {
+      descricaoFinal = formTransacao.descricaoDespesa || "Despesa Geral";
+    }
+
+    const novaTransacao = {
+      id: Date.now(),
+      data: "Hoje",
+      descricao: descricaoFinal,
+      tipo: formTransacao.tipo,
+      valor: parseFloat(formTransacao.valor),
+      status: formTransacao.status,
+    };
+
+    setTransacoes([novaTransacao, ...transacoes]);
+    setIsModalOpen(false);
+
+    // Reset do formulário
+    setFormTransacao({
+      tipo: "receita",
+      aluno: "",
+      classe: "10ª Classe A",
+      mesReferencia: "Outubro",
+      descricaoDespesa: "",
+      valor: "",
+      status: "concluido",
+    });
   };
 
   return (
@@ -82,7 +134,10 @@ export const Finances = () => {
             <button className="btn btn--outline">Exportar Excel</button>
           </div>
 
-          <button className="btn btn--primary btn--glass">
+          <button
+            className="btn btn--primary btn--glass"
+            onClick={() => setIsModalOpen(true)}
+          >
             <svg
               width="16"
               height="16"
@@ -101,7 +156,7 @@ export const Finances = () => {
         </div>
       </header>
 
-      {/* KPIs Financeiros com Glassmorphism sutil */}
+      {/* KPIs Financeiros */}
       <section className="finance-kpi-grid">
         <div className="finance-card finance-card--income">
           <div className="finance-card__header">
@@ -148,9 +203,8 @@ export const Finances = () => {
         </div>
       </section>
 
-      {/* Gráfico (Mockup em CSS) e Transações Recentes */}
+      {/* Conteúdo Principal */}
       <div className="finance-content-grid">
-        {/* Painel de Transações */}
         <section className="finance-panel finance-panel--transactions">
           <div className="finance-panel__header">
             <h3 className="finance-panel__title">Transações Recentes</h3>
@@ -168,7 +222,7 @@ export const Finances = () => {
                 </tr>
               </thead>
               <tbody>
-                {transacoesData.map((item) => (
+                {transacoes.map((item) => (
                   <tr key={item.id}>
                     <td className="finance-table__date">{item.data}</td>
                     <td className="finance-table__desc">
@@ -195,7 +249,7 @@ export const Finances = () => {
           </div>
         </section>
 
-        {/* Painel de Resumo Rápido */}
+        {/* Estrutura de Custos */}
         <section className="finance-panel finance-panel--summary">
           <div className="finance-panel__header">
             <h3 className="finance-panel__title">Estrutura de Custos</h3>
@@ -254,6 +308,225 @@ export const Finances = () => {
           </div>
         </section>
       </div>
+
+      {/* =========================================
+          MODAL ADAPTADA (Propina vs Despesa)
+          ========================================= */}
+      {isModalOpen && (
+        <div
+          className="finance-modal-backdrop"
+          onClick={() => setIsModalOpen(false)}
+        >
+          <div className="finance-modal" onClick={(e) => e.stopPropagation()}>
+            <header className="finance-modal__header">
+              <h3 className="finance-modal__title">Nova Transação</h3>
+              <button
+                className="finance-modal__close-btn"
+                onClick={() => setIsModalOpen(false)}
+              >
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                  <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+              </button>
+            </header>
+
+            <form
+              className="finance-modal__form"
+              onSubmit={handleSalvarTransacao}
+            >
+              {/* Segmented Control Tipo de Movimentação */}
+              <div className="form-group">
+                <label className="form-group__label">Tipo de Fluxo</label>
+                <div className="segmented-control">
+                  <input
+                    type="radio"
+                    id="tipo-receita"
+                    name="tipo"
+                    value="receita"
+                    checked={formTransacao.tipo === "receita"}
+                    onChange={handleInputChange}
+                  />
+                  <label
+                    htmlFor="tipo-receita"
+                    className="segmented-control__button segmented-control__button--income"
+                  >
+                    Propina (Receita)
+                  </label>
+
+                  <input
+                    type="radio"
+                    id="tipo-despesa"
+                    name="tipo"
+                    value="despesa"
+                    checked={formTransacao.tipo === "despesa"}
+                    onChange={handleInputChange}
+                  />
+                  <label
+                    htmlFor="tipo-despesa"
+                    className="segmented-control__button segmented-control__button--expense"
+                  >
+                    Despesa
+                  </label>
+                </div>
+              </div>
+
+              {/* RENDERIZAÇÃO CONDICIONAL BASEADA NO TIPO DE FLUXO */}
+              {formTransacao.tipo === "receita" ? (
+                <>
+                  {/* Nome do Aluno */}
+                  <div className="form-group">
+                    <label className="form-group__label" htmlFor="aluno">
+                      Nome do Aluno
+                    </label>
+                    <input
+                      type="text"
+                      id="aluno"
+                      name="aluno"
+                      className="form-group__input"
+                      placeholder="Ex: Anselmo Ralph"
+                      value={formTransacao.aluno}
+                      onChange={handleInputChange}
+                      required
+                      autoFocus
+                    />
+                  </div>
+
+                  {/* Grid de Seleção Escolar */}
+                  <div className="form-row-grid">
+                    <div className="form-group">
+                      <label className="form-group__label" htmlFor="classe">
+                        Classe / Turma
+                      </label>
+                      <select
+                        id="classe"
+                        name="classe"
+                        className="form-group__select"
+                        value={formTransacao.classe}
+                        onChange={handleInputChange}
+                      >
+                        <option value="10ª Classe A">10ª Classe A</option>
+                        <option value="11ª Classe A">11ª Classe A</option>
+                        <option value="12ª Classe A">12ª Classe A</option>
+                        <option value="12ª Classe B">12ª Classe B</option>
+                      </select>
+                    </div>
+
+                    <div className="form-group">
+                      <label
+                        className="form-group__label"
+                        htmlFor="mesReferencia"
+                      >
+                        Mês de Referência
+                      </label>
+                      <select
+                        id="mesReferencia"
+                        name="mesReferencia"
+                        className="form-group__select"
+                        value={formTransacao.mesReferencia}
+                        onChange={handleInputChange}
+                      >
+                        <option value="Janeiro">Janeiro</option>
+                        <option value="Fevereiro">Fevereiro</option>
+                        <option value="Março">Março</option>
+                        <option value="Abril">Abril</option>
+                        <option value="Maio">Maio</option>
+                        <option value="Junho">Junho</option>
+                        <option value="Julho">Julho</option>
+                        <option value="Agosto">Agosto</option>
+                        <option value="Setembro">Setembro</option>
+                        <option value="Outubro">Outubro</option>
+                        <option value="Novembro">Novembro</option>
+                        <option value="Dezembro">Dezembro</option>
+                      </select>
+                    </div>
+                  </div>
+                </>
+              ) : (
+                /* Caso mude para Despesa, exibe o campo livre original */
+                <div className="form-group">
+                  <label
+                    className="form-group__label"
+                    htmlFor="descricaoDespesa"
+                  >
+                    Descrição da Despesa
+                  </label>
+                  <input
+                    type="text"
+                    id="descricaoDespesa"
+                    name="descricaoDespesa"
+                    className="form-group__input"
+                    placeholder="Ex: Compra de Resmas A4"
+                    value={formTransacao.descricaoDespesa}
+                    onChange={handleInputChange}
+                    required
+                  />
+                </div>
+              )}
+
+              {/* Grid Comum para Valor e Status */}
+              <div className="form-row-grid">
+                <div className="form-group">
+                  <label className="form-group__label" htmlFor="valor">
+                    Valor Pago (AOA)
+                  </label>
+                  <input
+                    type="number"
+                    id="valor"
+                    name="valor"
+                    className="form-group__input font-medium"
+                    placeholder="0,00"
+                    value={formTransacao.valor}
+                    onChange={handleInputChange}
+                    required
+                    min="0"
+                    step="0.01"
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label className="form-group__label" htmlFor="status">
+                    Status Inicial
+                  </label>
+                  <select
+                    id="status"
+                    name="status"
+                    className="form-group__select"
+                    value={formTransacao.status}
+                    onChange={handleInputChange}
+                  >
+                    <option value="concluido">Concluído</option>
+                    <option value="pendente">Pendente</option>
+                  </select>
+                </div>
+              </div>
+
+              {/* Rodapé de Ações */}
+              <footer className="finance-modal__footer">
+                <button
+                  type="button"
+                  className="btn btn--secondary"
+                  onClick={() => setIsModalOpen(false)}
+                >
+                  Cancelar
+                </button>
+                <button type="submit" className="btn btn--primary">
+                  Registar Fluxo
+                </button>
+              </footer>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
