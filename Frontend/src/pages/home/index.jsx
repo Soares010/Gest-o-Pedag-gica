@@ -1,16 +1,19 @@
 import { Sidebar } from "../../components/Sidebar";
 import { Auth } from "../auth";
 import { Dashboard } from "../dashboard";
+import { Manager } from "../manager";
 import { AddUser } from "../user";
 
 function App() {
   return (
     <div className="app-layout">
-      {/* <Sidebar /> */}
-        <Auth />
+      <Sidebar />
+      {/* <Auth /> */}
       <main className="main-container">
         {/* Mude aqui para testar as telas */}
         {/* <Dashboard /> */}
+        <Manager />
+
         {/* <AddUser /> */}
       </main>
     </div>

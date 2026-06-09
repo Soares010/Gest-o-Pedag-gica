@@ -1,0 +1,424 @@
+.pedagogical-layout {
+	padding: 2rem;
+	font-family: var(--font-family);
+	background-color: var(--color-bg-app);
+	min-height: 100vh;
+	box-sizing: border-box;
+}
+
+/* =========================================
+   Header e Filtros
+   ========================================= */
+.dashboard-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 2rem;
+	flex-wrap: wrap;
+	gap: 1.5rem;
+}
+
+.dashboard-header__title-group {
+	flex: 1;
+	min-width: 300px;
+}
+
+.dashboard-header__title {
+	font-size: 1.5rem;
+	font-weight: 600;
+	color: var(--color-text-main);
+	margin: 0 0 0.25rem 0;
+}
+
+.dashboard-header__subtitle {
+	font-size: 0.875rem;
+	color: var(--color-text-muted);
+	margin: 0;
+}
+
+.dashboard-header__actions {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	flex-wrap: wrap;
+}
+
+.dashboard-filters {
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+	background-color: var(--color-surface);
+	padding: 0.5rem 0.75rem;
+	border-radius: var(--radius-lg);
+	box-shadow: var(--shadow-sm);
+	border: 1px solid var(--color-border);
+}
+
+.form-group--inline {
+	margin-bottom: 0;
+}
+
+.form-group--inline .form-group__input {
+	min-width: 170px;
+	padding: 0.5rem 0.75rem;
+	cursor: pointer;
+	border: none;
+	background-color: transparent;
+}
+
+.form-group--inline .form-group__input:focus {
+	box-shadow: none;
+}
+
+/* =========================================
+   Grid de KPIs
+   ========================================= */
+.kpi-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+	gap: 1.5rem;
+	margin-bottom: 2rem;
+}
+
+.kpi-card {
+	background-color: var(--color-surface);
+	padding: 1.5rem;
+	border-radius: var(--radius-lg);
+	border: 1px solid var(--color-border);
+	box-shadow: var(--shadow-sm);
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+	transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.kpi-card:hover {
+	transform: translateY(-2px);
+	box-shadow: var(--shadow-md);
+}
+
+.kpi-card__label {
+	font-size: 0.875rem;
+	font-weight: 500;
+	color: var(--color-text-muted);
+}
+
+.kpi-card__value-group {
+	display: flex;
+	align-items: baseline;
+	gap: 0.75rem;
+}
+
+.kpi-card__value {
+	font-size: 1.75rem;
+	font-weight: 700;
+	color: var(--color-text-main);
+	margin: 0;
+}
+
+.kpi-card__trend {
+	font-size: 0.75rem;
+	font-weight: 600;
+	padding: 0.25rem 0.5rem;
+	border-radius: 9999px;
+}
+
+.kpi-card__trend--up {
+	background-color: #DCFCE7;
+	color: #166534;
+}
+
+.kpi-card__trend--down {
+	background-color: #FEE2E2;
+	color: #991B1B;
+}
+
+/* =========================================
+   Tabela de Dados
+   ========================================= */
+.data-section {
+	background-color: var(--color-surface);
+	border-radius: var(--radius-lg);
+	border: 1px solid var(--color-border);
+	box-shadow: var(--shadow-sm);
+	overflow: hidden;
+}
+
+.data-section__header {
+	padding: 1.5rem;
+	border-bottom: 1px solid var(--color-border);
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.data-section__title {
+	font-size: 1.125rem;
+	font-weight: 600;
+	color: var(--color-text-main);
+	margin: 0;
+}
+
+.table-container {
+	width: 100%;
+	overflow-x: auto;
+}
+
+.data-table {
+	width: 100%;
+	border-collapse: collapse;
+	text-align: left;
+}
+
+.data-table th,
+.data-table td {
+	padding: 1rem 1.5rem;
+	border-bottom: 1px solid var(--color-border);
+	font-size: 0.875rem;
+}
+
+.data-table th {
+	background-color: #F9FAFB;
+	font-weight: 600;
+	color: var(--color-text-muted);
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+	font-size: 0.75rem;
+}
+
+.data-table tbody tr {
+	transition: background-color 0.15s ease;
+}
+
+.data-table tbody tr:hover {
+	background-color: #F9FAFB;
+}
+
+.font-medium {
+	font-weight: 500;
+	color: var(--color-text-main);
+}
+
+.font-bold {
+	font-weight: 700;
+	color: var(--color-text-main);
+}
+
+/* =========================================
+   Badges de Status
+   ========================================= */
+.status-badge {
+	display: inline-flex;
+	align-items: center;
+	padding: 0.25rem 0.75rem;
+	border-radius: 9999px;
+	font-size: 0.75rem;
+	font-weight: 600;
+}
+
+.status-badge--excelente {
+	background-color: #DCFCE7;
+	color: #166534;
+}
+
+.status-badge--atencao {
+	background-color: #FEF3C7;
+	color: #92400E;
+}
+
+.status-badge--critico {
+	background-color: #FEE2E2;
+	color: #991B1B;
+}
+
+/* =========================================
+   Botões e Componentes de Formulário
+   ========================================= */
+.button {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5rem;
+	padding: 0.625rem 1.25rem;
+	border-radius: var(--radius-md);
+	font-size: 0.875rem;
+	font-weight: 500;
+	cursor: pointer;
+	border: none;
+	transition: all 0.2s ease;
+}
+
+.button--primary {
+	background-color: var(--color-primary);
+	color: #FFFFFF;
+}
+
+.button--primary:hover {
+	background-color: var(--color-primary-hover);
+	box-shadow: 0 4px 12px rgba(139, 92, 246, 0.2);
+}
+
+.button--secondary {
+	background-color: transparent;
+	color: var(--color-text-muted);
+}
+
+.button--secondary:hover {
+	background-color: #F3F4F6;
+	color: var(--color-text-main);
+}
+
+.button--outline {
+	background-color: transparent;
+	color: var(--color-text-main);
+	border: 1px solid var(--color-border);
+}
+
+.button--outline:hover {
+	background-color: #F9FAFB;
+	border-color: #D1D5DB;
+}
+
+.form-group {
+	display: flex;
+	flex-direction: column;
+	gap: 0.375rem;
+}
+
+.form-group__label {
+	color: var(--color-text-main);
+	font-size: 0.875rem;
+	font-weight: 500;
+}
+
+.form-group__input {
+	width: 100%;
+	padding: 0.625rem 0.875rem;
+	border: 1px solid var(--color-border);
+	border-radius: var(--radius-md);
+	font-size: 0.875rem;
+	color: var(--color-text-main);
+	background-color: var(--color-surface);
+	transition: border-color 0.2s ease, box-shadow 0.2s ease;
+	box-sizing: border-box;
+}
+
+.form-group__input:focus {
+	outline: none;
+	border-color: var(--color-primary);
+	box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.12);
+}
+
+/* =========================================
+   Sistema de Modais (Camada Avançada)
+   ========================================= */
+.modal-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background-color: rgba(15, 23, 42, 0.3);
+	/* Backdrop escurecido sutil */
+	backdrop-filter: blur(4px);
+	/* Blur profissional */
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 9999;
+	animation: fadeIn 0.2s ease-out;
+}
+
+.modal-card {
+	background-color: var(--color-surface);
+	border-radius: var(--radius-lg);
+	box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+	width: 100%;
+	max-width: 560px;
+	overflow: hidden;
+	animation: slideUp 0.25s ease-out;
+}
+
+.modal-card__header {
+	padding: 1.5rem;
+	border-bottom: 1px solid var(--color-border);
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+}
+
+.modal-card__title {
+	font-size: 1.25rem;
+	font-weight: 600;
+	color: var(--color-text-main);
+	margin: 0 0 0.25rem 0;
+}
+
+.modal-card__subtitle {
+	font-size: 0.875rem;
+	color: var(--color-text-muted);
+	margin: 0;
+}
+
+.modal-card__close-btn {
+	background: transparent;
+	border: none;
+	font-size: 1.5rem;
+	color: var(--color-text-muted);
+	cursor: pointer;
+	line-height: 1;
+	padding: 0.25rem;
+	border-radius: var(--radius-md);
+	transition: background-color 0.15s;
+}
+
+.modal-card__close-btn:hover {
+	background-color: #F3F4F6;
+	color: var(--color-text-main);
+}
+
+.modal-form {
+	padding: 1.5rem;
+}
+
+.modal-form__grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 1.25rem;
+}
+
+.form-group--full-width {
+	grid-column: span 2;
+}
+
+.modal-form__actions {
+	margin-top: 2rem;
+	padding-top: 1rem;
+	border-top: 1px solid var(--color-border);
+	display: flex;
+	justify-content: flex-end;
+	gap: 0.75rem;
+}
+
+/* Animações de Entrada */
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes slideUp {
+	from {
+		transform: translateY(16px);
+		opacity: 0;
+	}
+
+	to {
+		transform: translateY(0);
+		opacity: 1;
+	}
+}
