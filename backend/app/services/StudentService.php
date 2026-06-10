@@ -2,4 +2,6 @@
 namespace App\services;
 
 
-class
+class StudentService{
+	
+}
