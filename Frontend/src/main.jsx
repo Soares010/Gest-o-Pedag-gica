@@ -7,6 +7,10 @@ import {
   useNavigation,
 } from "react-router-dom";
 
+// NGPROGRESS
+import NProgress from "nprogress";
+import "nprogress/nprogress.css";
+
 // STYLES
 import "./assets/styles/index.css";
 import "./assets/styles/Global.css";
@@ -22,14 +26,14 @@ import { AuthProvider } from "./context/AuthContext";
 const delay = (ms = 2000) => new Promise((resolve) => setTimeout(resolve, ms));
 
 function AppLayout() {
-  //   const navigation = useNavigation();
+  const navigation = useNavigation();
 
-  //   useEffect(() => {
-  //     if (navigation.state === "loading") {
-  //       NProgress.start();
-  //     }
-  //     NProgress.done();
-  //   }, [navigation.state]);
+  useEffect(() => {
+    if (navigation.state === "loading") {
+      NProgress.start();
+    }
+    NProgress.done();
+  }, [navigation.state]);
 
   return (
     <AuthProvider>
@@ -46,6 +50,10 @@ const router = createBrowserRouter([
       {
         path: "",
         element: <Auth />,
+      //   loader: async () => {
+      //     await delay(2000);
+      //     return null;
+      //   },
       },
       {
         path: "/dashboard",
