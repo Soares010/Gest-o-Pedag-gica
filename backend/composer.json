@@ -3,8 +3,9 @@
   "autoload": {
     "psr-4": {
       "App\\": "app/",
-      "Models\\": "models/",
-      "Controllers\\": "controllers/"
+      "Routes\\": "routes/",
+      "Controllers\\": "controllers/",
+      "Services\\": "services/"
     }
   },
   "authors": [

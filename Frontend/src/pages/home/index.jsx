@@ -7,10 +7,10 @@ import { AddUser } from "../user";
 
 function App() {
   return (
-    <div className="app-layout">
+    <div >
       <Sidebar />
       {/* <Auth /> */}
-      <main className="main-container">
+      <main >
         {/* Mude aqui para testar as telas */}
         {/* <Dashboard /> */}
         <Manager />

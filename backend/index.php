@@ -7,10 +7,17 @@ use Bramus\Router\Router;
 $router = new Router();
 
 
-header("Acess-Control-Allow-Origin: *");
-header("Content-Type: application/json; charset-UTF8");
-header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
-header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-with");
+// Permitir envio de dados em Json
+header('Content-Type: application/json');
+// Permitir qualquer origem (para desenvolvimento)
+header("Access-Control-Allow-Origin: *");
+// Permitir os cabeçalhos usados pela requisição
+header("Access-Control-Allow-Headers: Content-Type");
+// Permitir métodos específicos
+header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, PATCH, OPTIONS");
+
+
+
 
 
 $router->options('/.*', function () {
@@ -18,6 +25,16 @@ $router->options('/.*', function () {
 	exit();
 });
 
+$router->before("POST", "/auth", function () {
+	$data = json_decode(file_get_contents('php://input'), true);
+	echo (json_encode($data));
+
+	http_response_code(200);
+
+	exit();
+});
+
 
 // Executa o router!
 $router->run();
+ 

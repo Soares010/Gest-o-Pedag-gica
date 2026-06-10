@@ -1,11 +1,19 @@
-import React from "react";
+import { useState } from "react";
 import "../../assets/styles/auth.css";
+import { useAuth } from "../../hooks/useAuth";
 
 export const Auth = () => {
-  const handleSubmit = (e) => {
+  const { authenticateUser } = useAuth();
+  const [user, setUer] = useState({});
+
+  function handleChange(e) {
+    setUer({ ...user, [e.target.name]: e.target.value });
+  }
+
+  async function handleSubmit(e) {
     e.preventDefault();
-    // Lógica de autenticação aqui
-  };
+    await authenticateUser(user);
+  }
 
   return (
     <div className="login-layout">
@@ -34,6 +42,8 @@ export const Auth = () => {
               id="email"
               placeholder="admin@onschool.com"
               required
+              name="email"
+              onChange={handleChange}
             />
           </div>
 
@@ -47,14 +57,16 @@ export const Auth = () => {
               id="password"
               placeholder="••••••••"
               required
+              name="password"
+              onChange={handleChange}
             />
           </div>
 
           <div className="login-form__actions">
-            <label className="checkbox-wrapper">
+            {/* <label className="checkbox-wrapper">
               <input type="checkbox" className="checkbox-wrapper__input" />
               <span className="checkbox-wrapper__label">Lembrar-me</span>
-            </label>
+            </label> */}
             <a href="/recuperar-senha" className="login-form__forgot-link">
               Esqueceu a senha?
             </a>

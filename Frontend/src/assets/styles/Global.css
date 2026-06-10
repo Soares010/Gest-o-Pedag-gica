@@ -92,3 +92,42 @@ body {
 		padding: 20px;
 	}
 }
+
+#nprogress .bar {
+	background: #94a3b8;
+	height: 3px;
+}
+
+
+::view-transition-group(root) {
+	animation-duration: 0.35s;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+	animation-duration: 0.35s;
+	animation-timing-function: cubic-bezier(0.25, 1, 0.5, 1);
+	mix-blend-mode: normal;
+}
+
+@keyframes left-to-right-out {
+	to {
+		transform: translateX(100%);
+		opacity: 0;
+	}
+}
+
+@keyframes left-to-right-in {
+	from {
+		transform: translateX(-100%);
+		opacity: 0;
+	}
+}
+
+::view-transition-old(root) {
+	animation-name: left-to-right-out;
+}
+
+::view-transition-new(root) {
+	animation-name: left-to-right-in;
+}

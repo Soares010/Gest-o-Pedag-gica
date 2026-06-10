@@ -1,13 +1,20 @@
 /* Layout Principal - Centralizado e com largura máxima controlada */
 .content-wrapper {
+	position: relative;
 	display: flex;
-	gap: 24px;
-	padding: 30px;
-	max-width: 1200px;
+	gap: 18px;
+	top: 10px;
+	right: -10%;
+	padding: 10px;
+	width: 100%;
+	max-width: 1100px;
+	justify-content: center;
+	/* align-items: center; */
 	/* ISSO IMPEDE DE FICAR LARGO DEMAIS */
 	margin: 0 auto;
 	position: relative;
 	z-index: 10;
+	/* border: 1px solid red; */
 }
 
 .form-card {
@@ -15,6 +22,7 @@
 	border-radius: 4px;
 	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 	border: 1px solid #e2e8f0;
+
 }
 
 .side-panel {
@@ -24,8 +32,7 @@
 }
 
 .main-panel {
-	flex: 1;
-	/* Ocupa o resto, mas respeita os 1200px do pai */
+	flex: .8;
 }
 
 .card-title {
