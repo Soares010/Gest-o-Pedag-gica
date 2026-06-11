@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "../../assets/styles/Manager.css";
+import { Sidebar } from "../../components/Sidebar";
 
 export const Manager = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -41,7 +42,8 @@ export const Manager = () => {
   ];
 
   return (
-    <div className="pedagogical-layout">
+    <div className="pedagogical-layout main-container">
+      <Sidebar />
       {/* Cabeçalho da Página e Filtros */}
       <header className="dashboard-header">
         <div className="dashboard-header__title-group">

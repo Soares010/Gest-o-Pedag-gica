@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "../../assets/styles/Finances.css";
+import { Sidebar } from "../../components/Sidebar";
 
 export const Finances = () => {
   const [filtroMes, setFiltroMes] = useState("outubro");
@@ -110,7 +111,8 @@ export const Finances = () => {
   };
 
   return (
-    <div className="finance-layout">
+    <div className="finance-layout main-container">
+      <Sidebar />
       {/* Cabeçalho */}
       <header className="finance-header">
         <div className="finance-header__info">

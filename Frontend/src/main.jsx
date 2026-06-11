@@ -19,6 +19,8 @@ import "./assets/styles/Global.css";
 import { Auth } from "./pages/auth";
 import { Dashboard } from "./pages/dashboard";
 import { AddUser } from "./pages/user";
+import { Manager } from "./pages/manager";
+import { Finances } from "./pages/finances";
 
 //PROVIDERS
 import { AuthProvider } from "./context/AuthContext";
@@ -50,10 +52,10 @@ const router = createBrowserRouter([
       {
         path: "",
         element: <Auth />,
-      //   loader: async () => {
-      //     await delay(2000);
-      //     return null;
-      //   },
+        //   loader: async () => {
+        //     await delay(2000);
+        //     return null;
+        //   },
       },
       {
         path: "/dashboard",
@@ -62,6 +64,14 @@ const router = createBrowserRouter([
       {
         path: "/adduser",
         element: <AddUser />,
+      },
+      {
+        path: "/manager",
+        element: <Manager />,
+      },
+      {
+        path: "/finances",
+        element: <Finances />,
       },
     ],
   },

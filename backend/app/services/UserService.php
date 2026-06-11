@@ -15,4 +15,9 @@ class UserService extends Model
 			echo json_encode($this->data);
 		}
 	}
+
+	public function create() {}
+	public function show() {}
+	public function update() {}
+	public function delete() {}
 }
