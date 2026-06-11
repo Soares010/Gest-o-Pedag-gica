@@ -33,8 +33,10 @@ function AppLayout() {
   useEffect(() => {
     if (navigation.state === "loading") {
       NProgress.start();
+    } else {
+      // Só fecha quando o estado voltar a ser "idle" (ocioso)
+      NProgress.done();
     }
-    NProgress.done();
   }, [navigation.state]);
 
   return (
@@ -52,26 +54,42 @@ const router = createBrowserRouter([
       {
         path: "",
         element: <Auth />,
-        //   loader: async () => {
-        //     await delay(2000);
-        //     return null;
-        //   },
+        loader: async () => {
+          await delay(2500);
+          return null;
+        },
       },
       {
         path: "/dashboard",
         element: <Dashboard />,
+        loader: async () => {
+          await delay(2500);
+          return null;
+        },
       },
       {
         path: "/adduser",
         element: <AddUser />,
+        loader: async () => {
+          await delay(2500);
+          return null;
+        },
       },
       {
         path: "/manager",
         element: <Manager />,
+        loader: async () => {
+          await delay(2500);
+          return null;
+        },
       },
       {
         path: "/finances",
         element: <Finances />,
+        loader: async () => {
+          await delay(2500);
+          return null;
+        },
       },
     ],
   },

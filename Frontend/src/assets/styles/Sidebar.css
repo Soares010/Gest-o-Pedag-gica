@@ -50,11 +50,17 @@
 	transition: 0.2s;
 }
 
+.nav-link a {
+
+	color: var(--primary);
+}
 
 .nav-link.active {
 	background: #f5f3ff;
-	color: var(--primary);
 	border-right: 3px solid var(--primary);
+	/* display: flex; */
+	/* align-items: center; */
+	/* border: 1px solid red;*/
 }
 
 /* Agrupador do ícone e do texto interno */
