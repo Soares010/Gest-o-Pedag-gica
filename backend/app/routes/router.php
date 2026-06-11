@@ -1,8 +1,8 @@
 <?php
+
 namespace App\routes;
 
 $router->mount("/auth", function () use ($router) {
-
 	$router->post("/", "AuthController@auth");
 });
 

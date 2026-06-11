@@ -14,9 +14,4 @@ abstract class Model
 	{
 		$this->connect = Connection::getInstance();
 	}
-
-	abstract public function create();
-	abstract public function update();
-	abstract public function delete();
-	abstract public function show();
 }

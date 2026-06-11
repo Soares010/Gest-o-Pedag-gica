@@ -2,16 +2,13 @@
 
 namespace App\controllers;
 
-use App\services\UserService;
+use App\services\AuthService;
 
 class AuthController
 {
-	private array $data;
 	public function auth()
 	{
-
-		$auth = new UserService();
-		$auth->data = json_decode(file_get_contents("php://input"), true);
-		$auth->authenticate();
+		$auth = new AuthService();
+		$auth->authenticate(json_decode(file_get_contents("php://input"), true));
 	}
 }
