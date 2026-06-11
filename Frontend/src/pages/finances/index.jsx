@@ -133,7 +133,7 @@ export const Finances = () => {
               <option value="outubro">Outubro 2023</option>
               <option value="novembro">Novembro 2023</option>
             </select>
-            <button className="btn btn--outline">Exportar Excel</button>
+            <button className="btn btn--outline">Exportar PDF</button>
           </div>
 
           <button
@@ -171,7 +171,7 @@ export const Finances = () => {
           </p>
         </div>
 
-        <div className="finance-card finance-card--expense">
+        {/* <div className="finance-card finance-card--expense">
           <div className="finance-card__header">
             <span className="finance-card__label">Total de Despesas</span>
             <span className="finance-card__icon text-red">↓</span>
@@ -180,7 +180,7 @@ export const Finances = () => {
           <p className="finance-card__comparison negative">
             +5% em relação a Setembro
           </p>
-        </div>
+        </div> */}
 
         <div className="finance-card finance-card--balance">
           <div className="finance-card__header">
@@ -210,7 +210,7 @@ export const Finances = () => {
         <section className="finance-panel finance-panel--transactions">
           <div className="finance-panel__header">
             <h3 className="finance-panel__title">Transações Recentes</h3>
-            <button className="btn btn--text">Ver todas</button>
+            {/* <button className="btn btn--text">Ver todas</button> */}
           </div>
 
           <div className="finance-table-wrapper">
@@ -252,7 +252,7 @@ export const Finances = () => {
         </section>
 
         {/* Estrutura de Custos */}
-        <section className="finance-panel finance-panel--summary">
+        {/* <section className="finance-panel finance-panel--summary">
           <div className="finance-panel__header">
             <h3 className="finance-panel__title">Estrutura de Custos</h3>
           </div>
@@ -308,7 +308,7 @@ export const Finances = () => {
               Iniciar Fechamento
             </button>
           </div>
-        </section>
+        </section> */}
       </div>
 
       {/* =========================================

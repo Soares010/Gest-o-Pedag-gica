@@ -55,12 +55,12 @@ export const Manager = () => {
 
         <div className="dashboard-header__actions">
           <div className="dashboard-filters">
-            <div className="form-group form-group--inline">
+            {/* <div className="form-group form-group--inline">
               <select className="form-group__input" defaultValue="2023/2024">
                 <option value="2023/2024">Ano lectivo: 2023/2024</option>
                 <option value="2022/2023">Ano lectivo: 2022/2023</option>
               </select>
-            </div>
+            </div> */}
             <div className="form-group form-group--inline">
               <select className="form-group__input" defaultValue="geral">
                 <option value="geral">Visão: Geral</option>
@@ -110,7 +110,7 @@ export const Manager = () => {
 
       {/* Cartões de KPI */}
       <section className="kpi-grid">
-        <div className="kpi-card">
+        {/* <div className="kpi-card">
           <span className="kpi-card__label">Média Institucional</span>
           <div className="kpi-card__value-group">
             <h2 className="kpi-card__value">14.2</h2>
@@ -132,9 +132,9 @@ export const Manager = () => {
             <h2 className="kpi-card__value">45</h2>
             <span className="kpi-card__trend kpi-card__trend--down">↓ 12</span>
           </div>
-        </div>
+        </div> */}
 
-        <div className="kpi-card">
+        <div className="kpi-card" style={{width: "300px"}}>
           <span className="kpi-card__label">Total de Alunos (Ativos)</span>
           <div className="kpi-card__value-group">
             <h2 className="kpi-card__value">1.240</h2>
