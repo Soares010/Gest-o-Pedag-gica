@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "../../assets/styles/auth.css";
 import { useAuth } from "../../hooks/useAuth";
+import { Toaster } from "react-hot-toast";
 
 export const Auth = () => {
   const { authenticateUser } = useAuth();
@@ -17,6 +18,7 @@ export const Auth = () => {
 
   return (
     <div className="login-layout">
+      <Toaster />
       <div className="login-card">
         {/* Header com a Logo do ON-SCHOOL */}
         <div className="login-card__header">
