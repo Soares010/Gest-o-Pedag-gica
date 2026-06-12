@@ -14,7 +14,7 @@ export const Sidebar = () => {
 
   // Remove a barra inicial para validação de rota ativa
   const checkLocals = location.pathname.replace(/^\//, "");
-  console.log("Rota atual ativa:", checkLocals);
+  //   console.log("Rota atual ativa:", checkLocals);
 
   // Estado para controlar os menus abertos (adiciona a classe "open")
   const [openMenus, setOpenMenus] = useState({

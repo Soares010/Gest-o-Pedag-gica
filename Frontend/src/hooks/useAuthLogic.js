@@ -26,14 +26,14 @@ export const useAuthLogic = () => {
   }, [success, error]);
 
   const authenticateUser = useCallback(async (userData) => {
-    const required = ["email", "password"];
+    //     const required = ["email", "password"];
 
-    const errroMessage = validate(required, user);
+    //     const errroMessage = validate(required, user);
 
-    if (errroMessage) {
-      setError(errroMessage);
-      return;
-    }
+    //     if (errroMessage) {
+    //       setError(errroMessage);
+    //       return;
+    //     }
     try {
       const response = await api.post("/auth", userData, {
         withCredentials: true,

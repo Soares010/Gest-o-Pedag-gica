@@ -24,6 +24,7 @@ import { Finances } from "./pages/finances";
 
 //PROVIDERS
 import { AuthProvider } from "./context/AuthContext";
+import { UserProvider } from "./context/UserContext";
 
 const delay = (ms = 2000) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -41,7 +42,9 @@ function AppLayout() {
 
   return (
     <AuthProvider>
-      <Outlet />
+      <UserProvider>
+        <Outlet />
+      </UserProvider>
     </AuthProvider>
   );
 }
