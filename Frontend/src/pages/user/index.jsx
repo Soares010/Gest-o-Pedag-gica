@@ -1,10 +1,54 @@
-import React, { useState } from "react";
+import React, { useReducer, useState } from "react";
 import "../../assets/styles/AddUser.css";
 import { Sidebar } from "../../components/Sidebar";
 
+function registerReducer(state, action) {
+  switch (action.type) {
+    case "REGISTER_START":
+      return { ...state, loading: true, error: null, success: false };
+
+    case "REGISTER_STUDENT_SUCCESS":
+      return {
+        ...state,
+        loading: false,
+        success: true,
+        userData: action.payload,
+      };
+
+    case "REGISTER_TEACHER_SUCCESS":
+      return {
+        ...state,
+        loading: false,
+        success: true,
+        userData: action.payload,
+      };
+
+    case "REGISTER_ADMIN_SUCCESS":
+      return {
+        ...state,
+        loading: false,
+        success: true,
+        userData: action.payload,
+      };
+
+    case "REGISTER_FAILURE":
+      return {
+        ...state,
+        loading: false,
+        success: false,
+        error: action.payload,
+      };
+
+    default:
+      return state;
+  }
+}
+
 export const AddUser = () => {
+  const [state, dispatch] = useReducer(registerReducer, {});
   const [userRole, setUserRole] = useState("aluno");
   const [user, setUser] = useState({});
+  const { studentAdd } = useUser();
 
   const getRoleLabel = () => {
     switch (userRole) {
@@ -22,8 +66,48 @@ export const AddUser = () => {
   };
 
   async function handleSubmit(e) {
-	  e.preventDefault();
-	  
+    e.preventDefault();
+
+    // 1. Sinaliza que o registo começou (pode usar para mostrar um spinner no botão)
+    dispatch({ type: "REGISTER_START" });
+
+    try {
+      // 2. O switch decide qual lógica/API chamar com base no cargo atual
+      switch (userRole) {
+        case "aluno":
+          console.log("Enviando dados para a API de Alunos:", user);
+          // Exemplo de integração:
+          // const resAluno = await api.post("/alunos", user);
+
+          // Se correu bem, envia o sucesso para o reducer
+          dispatch({ type: "REGISTER_STUDENT_SUCCESS", payload: user });
+          //     alert("Estudante registado com sucesso!");
+          break;
+
+        case "professor":
+          console.log("Enviando dados para a API de Professores:", user);
+          // const resProf = await api.post("/professores", user);
+
+          dispatch({ type: "REGISTER_TEACHER_SUCCESS", payload: user });
+          //     alert("Docente registado com sucesso!");
+          break;
+
+        case "admin":
+          console.log("Enviando dados para a API de Administrativos:", user);
+          // const resAdmin = await api.post("/admins", user);
+
+          dispatch({ type: "REGISTER_ADMIN_SUCCESS", payload: user });
+          //     alert("Administrativo registado com sucesso!");
+          break;
+
+        default:
+          throw new Error("Cargo de utilizador inválido.");
+      }
+    } catch (error) {
+      // Se houver algum erro na requisição, avisa o reducer
+      dispatch({ type: "REGISTER_FAILURE", payload: error.message });
+      alert("Erro ao salvar o registo: " + error.message);
+    }
   }
 
   function handleChange(e) {
@@ -193,11 +277,15 @@ export const AddUser = () => {
                         <div className="input-grid-4 mt-15">
                           <div className="input-field">
                             <label>Classe *</label>
-                            <select name="grade">
-                              <option>10ª Classe</option>
-                              <option>11ª Classe</option>
-                              <option>12ª Classe</option>
-                              <option>13ª Classe</option>
+                            <select
+                              name="grade"
+                              onChange={(e) => handleChange(e)}
+                            >
+                              <option value="">--Selecione a Classe--</option>
+                              <option value="10">10ª Classe</option>
+                              <option value="11">11ª Classe</option>
+                              <option value="12">12ª Classe</option>
+                              <option value="13">13ª Classe</option>
                             </select>
                           </div>
                           {/* <div className="input-field">
@@ -262,6 +350,7 @@ export const AddUser = () => {
                             name="office"
                             onChange={(e) => handleChange(e)}
                           >
+                            <option value="">--Selecione o Cargo--</option>
                             <option value="Secretary">Secretário(a)</option>
                             <option value="Coordinator">Coordenador(a)</option>
                           </select>
