@@ -26,7 +26,10 @@ export const useUserLogic = () => {
 
   const studentAdd = useCallback(async (user) => {
     try {
-      console.log(user);
+      const response = await api.post("/students/add", user, {
+        withCredentials: true,
+      });
+      console.log(response.data);
     } catch (error) {
       errors(setError, error);
     }

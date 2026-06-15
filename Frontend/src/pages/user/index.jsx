@@ -1,6 +1,7 @@
-import React, { useReducer, useState } from "react";
 import "../../assets/styles/AddUser.css";
+import React, { useReducer, useState } from "react";
 import { Sidebar } from "../../components/Sidebar";
+import { useUser } from "../../hooks/useUser";
 
 function registerReducer(state, action) {
   switch (action.type) {
@@ -75,9 +76,9 @@ export const AddUser = () => {
       // 2. O switch decide qual lógica/API chamar com base no cargo atual
       switch (userRole) {
         case "aluno":
-          console.log("Enviando dados para a API de Alunos:", user);
+      //     console.log("Enviando dados para a API de Alunos:", user);
           // Exemplo de integração:
-          // const resAluno = await api.post("/alunos", user);
+          await studentAdd(user);
 
           // Se correu bem, envia o sucesso para o reducer
           dispatch({ type: "REGISTER_STUDENT_SUCCESS", payload: user });
@@ -85,7 +86,7 @@ export const AddUser = () => {
           break;
 
         case "professor":
-          console.log("Enviando dados para a API de Professores:", user);
+          //     console.log("Enviando dados para a API de Professores:", user);
           // const resProf = await api.post("/professores", user);
 
           dispatch({ type: "REGISTER_TEACHER_SUCCESS", payload: user });
@@ -93,7 +94,7 @@ export const AddUser = () => {
           break;
 
         case "admin":
-          console.log("Enviando dados para a API de Administrativos:", user);
+          //     console.log("Enviando dados para a API de Administrativos:", user);
           // const resAdmin = await api.post("/admins", user);
 
           dispatch({ type: "REGISTER_ADMIN_SUCCESS", payload: user });
@@ -106,16 +107,16 @@ export const AddUser = () => {
     } catch (error) {
       // Se houver algum erro na requisição, avisa o reducer
       dispatch({ type: "REGISTER_FAILURE", payload: error.message });
-      alert("Erro ao salvar o registo: " + error.message);
+      // alert("Erro ao salvar o registo: " + error.message);
     }
   }
 
   function handleChange(e) {
-    console.log(e.target.value);
+//     console.log(e.target.value);
     setUser({ ...user, [e.target.name]: e.target.value });
   }
 
-  console.log(user);
+
 
   return (
     <div className="layout-container">

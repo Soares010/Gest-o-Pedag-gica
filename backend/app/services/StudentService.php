@@ -1,7 +1,11 @@
 <?php
+
 namespace App\services;
 
+use PDO;
 
-class StudentService{
+class StudentService extends Model
+{
+
 	
 }
