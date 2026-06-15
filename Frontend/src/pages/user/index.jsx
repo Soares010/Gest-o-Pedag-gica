@@ -1,7 +1,7 @@
 import "../../assets/styles/AddUser.css";
 import React, { useReducer, useState } from "react";
 import { Sidebar } from "../../components/Sidebar";
-import { useUser } from "../../hooks/useUser";
+import { useUserLogic } from "../../hooks/useUserLogic";
 
 function registerReducer(state, action) {
   switch (action.type) {
@@ -49,7 +49,7 @@ export const AddUser = () => {
   const [state, dispatch] = useReducer(registerReducer, {});
   const [userRole, setUserRole] = useState("aluno");
   const [user, setUser] = useState({});
-  const { studentAdd } = useUser();
+  const { studentAdd } = useUserLogic();
 
   const getRoleLabel = () => {
     switch (userRole) {
@@ -76,7 +76,7 @@ export const AddUser = () => {
       // 2. O switch decide qual lógica/API chamar com base no cargo atual
       switch (userRole) {
         case "aluno":
-      //     console.log("Enviando dados para a API de Alunos:", user);
+          //     console.log("Enviando dados para a API de Alunos:", user);
           // Exemplo de integração:
           await studentAdd(user);
 
@@ -112,11 +112,9 @@ export const AddUser = () => {
   }
 
   function handleChange(e) {
-//     console.log(e.target.value);
+    //     console.log(e.target.value);
     setUser({ ...user, [e.target.name]: e.target.value });
   }
-
-
 
   return (
     <div className="layout-container">
