@@ -39,16 +39,21 @@ export const useAuthLogic = () => {
         withCredentials: true,
       });
       const { user, token, message } = response.data;
-      setUser(user);
-      setSuccess(message);
-      localStorage.setItem(
-        "auth",
-        JSON.stringify({
-          user,
-          token,
-        }),
-      );
-      navigate("/dashboard");
+      if (token) {
+        setUser(user);
+        setSuccess(message);
+        localStorage.setItem(
+          "auth",
+          JSON.stringify({
+            user,
+            token,
+          }),
+        );
+        navigate("/dashboard");
+      } else {
+        setError(message);
+        console.log(message);
+      }
     } catch (error) {
       console.log(error.message);
       errors(error, setError);
