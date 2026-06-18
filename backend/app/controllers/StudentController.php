@@ -17,15 +17,28 @@ class StudentController
 			return;
 		}
 
-		if ($student->create(json_decode(file_get_contents("php://input"), true))) {
+		$result = $student->create(json_decode(file_get_contents("php://input"), true));
+		if ($result === "email_exists") {
+			http_response_code(400);
+			echo json_encode([
+				"status" => "error",
+				"message" => "Impossível registrar, este e-mail já está cadastrado!"
+			]);
+			return;
+		}
+		if ($result === "success") {
 			http_response_code(201);
 			echo json_encode([
+				"status" => "success",
 				"message" => "Aluno registrado com sucesso!"
 			]);
 			return;
-		} else {
+		}
+
+		if ($result === "error") {
 			http_response_code(400);
 			echo json_encode([
+				"status" => "error",
 				"message" => "Fala ao registrar aluno!"
 			]);
 		}
