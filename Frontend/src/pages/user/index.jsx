@@ -2,6 +2,7 @@ import "../../assets/styles/AddUser.css";
 import React, { useReducer, useState } from "react";
 import { Sidebar } from "../../components/Sidebar";
 import { useUserLogic } from "../../hooks/useUserLogic";
+import { Toaster } from "react-hot-toast";
 
 function registerReducer(state, action) {
   switch (action.type) {
@@ -119,6 +120,7 @@ export const AddUser = () => {
   return (
     <div className="layout-container">
       <Sidebar />
+      <Toaster />
 
       <main className="main-content">
         <form onSubmit={handleSubmit}>

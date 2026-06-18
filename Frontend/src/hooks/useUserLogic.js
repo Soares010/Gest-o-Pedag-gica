@@ -29,9 +29,26 @@ export const useUserLogic = () => {
       const response = await api.post("/students/add", user, {
         withCredentials: true,
       });
-      console.log(response.data);
+      const { status, message } = JSON.parse(response.data);
+      console.log(JSON.parse(response.data));
+      if (status === "success") {
+        setSuccess(message);
+      }
+
+      console.log(response.data.message);
     } catch (error) {
-      errors(setError, error);
+      if (error.response && error.response.data) {
+        const errorData =
+          typeof error.response.data === "string"
+            ? JSON.parse(error.response.data)
+            : error.response.data;
+
+        // Define o e-mail duplicado no estado de erro para disparar o Toaster
+        setError(errorData.message || "Erro ao registrar aluno.");
+      } else {
+        // Fallback para a sua função global de tratamento de erros
+        errors(setError, error);
+      }
     }
   }, []);
 

@@ -29,4 +29,11 @@ class StudentService extends Model
 			return "error";
 		}
 	}
+
+
+	public function list() {}
+
+	public function update(int $id) {}
+
+	public function delete(int $id) {}
 }
