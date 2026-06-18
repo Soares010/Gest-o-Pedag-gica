@@ -50,7 +50,7 @@ export const AddUser = () => {
   const [state, dispatch] = useReducer(registerReducer, {});
   const [userRole, setUserRole] = useState("aluno");
   const [user, setUser] = useState({});
-  const { studentAdd } = useUserLogic();
+  const { studentAdd, userAdd } = useUserLogic();
 
   const getRoleLabel = () => {
     switch (userRole) {
@@ -89,7 +89,7 @@ export const AddUser = () => {
         case "professor":
           //     console.log("Enviando dados para a API de Professores:", user);
           // const resProf = await api.post("/professores", user);
-
+          await userAdd(user);
           dispatch({ type: "REGISTER_TEACHER_SUCCESS", payload: user });
           //     alert("Docente registado com sucesso!");
           break;
@@ -333,11 +333,13 @@ export const AddUser = () => {
                           </select>
                         </div>
                         <div className="input-field">
-                          {/* <label>Especialidade / Disciplina principal *</label>
+                          <label>Palavra-Passe *</label>
                           <input
+                            name="password"
                             type="text"
-                            placeholder="Ex: Matemática, Física"
-                          /> */}
+                            placeholder="Ex: **********"
+                            onChange={(e) => handleChange(e)}
+                          />
                         </div>
                       </div>
                     )}
@@ -356,13 +358,15 @@ export const AddUser = () => {
                             <option value="Coordinator">Coordenador(a)</option>
                           </select>
                         </div>
-                        {/* <div className="input-field">
-                          <label>Departamento *</label>
+                        <div className="input-field">
+                          <label>Palavra-Passe *</label>
                           <input
+                            name="password"
                             type="text"
-                            placeholder="Ex: Secretaria Geral, Pedagogia"
+                            placeholder="Ex: **********"
+                            onChange={(e) => handleChange(e)}
                           />
-                        </div> */}
+                        </div>
                       </div>
                     )}
 

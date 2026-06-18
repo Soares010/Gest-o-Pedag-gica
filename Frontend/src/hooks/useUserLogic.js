@@ -52,10 +52,24 @@ export const useUserLogic = () => {
     }
   }, []);
 
+  const userAdd = useCallback(async (user) => {
+    console.log(user);
+
+    try {
+      const response = await api.post("/user/add", user, {
+        withCredentials: true,
+      });
+      console.log(response.data);
+    } catch (error) {
+      errors(setError, error);
+    }
+  }, []);
+
   return useMemo(() => {
     return {
       user,
       studentAdd,
+      userAdd,
     };
   }, [user, studentAdd]);
 };

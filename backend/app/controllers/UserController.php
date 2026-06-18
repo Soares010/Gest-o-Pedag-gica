@@ -2,22 +2,17 @@
 
 namespace App\controllers;
 
-use App\services\StudentService;
+use App\services\UserService;
 
-
-class StudentController
+class UserController
 {
+
 	public function add()
 	{
-		$student = new StudentService();
+		$user = new UserService();
 
-		// if (empty(json_decode(file_get_contents("php://input"), true))) {
-		// 	http_response_code(400); // Bad Request
-		// 	echo json_encode(["message" => "Dados do aluno não foram fornecidos ou são inválidos."]);
-		// 	return;
-		// }
+		$result = $user->create(json_decode(file_get_contents("php://input"), true));
 
-		$result = $student->create(json_decode(file_get_contents("php://input"), true));
 		if ($result === "email_exists") {
 			http_response_code(400);
 			echo json_encode([
@@ -26,22 +21,21 @@ class StudentController
 			]);
 			return;
 		}
+
 		if ($result === "success") {
 			http_response_code(201);
 			echo json_encode([
 				"status" => "success",
-				"message" => "Aluno registrado com sucesso!"
+				"message" => "Usuário registrado com sucesso!"
 			]);
 			return;
 		}
-
 		if ($result === "error") {
 			http_response_code(400);
 			echo json_encode([
 				"status" => "error",
-				"message" => "Fala ao registrar aluno!"
+				"message" => "Fala ao registrar usuário!"
 			]);
 		}
 	}
-
 }
